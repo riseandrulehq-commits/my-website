@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant Billing</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <nav class="tabs no-print">
+      <button type="button" data-tab="billing" class="tab active">
+        Billing
+      </button>
+      <button type="button" data-tab="manage" class="tab">Manage</button>
+    </nav>
+
+    <main id="billing-view" class="view active">
+      <div class="billing-layout">
+        <section class="menu-section">
+          <h2>Menu</h2>
+          <div id="menu-grid" class="menu-grid"></div>
+        </section>
+        <aside class="cart-section">
+          <h2>Bill</h2>
+          <div id="cart-bill" class="bill-for-print">
+            <div id="cart-items"></div>
+            <div id="cart-total" class="cart-total"></div>
+            <p class="thank-you no-screen">Thank you for dining with us!</p>
+          </div>
+          <div class="cart-actions no-print">
+            <button type="button" id="btn-pay-now">Pay now</button>
+            <button type="button" id="btn-print-bill">Print bill</button>
+            <button type="button" id="btn-clear-cart">Clear cart</button>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <main id="manage-view" class="view">
+      <section class="manage-menu">
+        <h2>Manage menu</h2>
+        <form id="menu-form" class="menu-form">
+          <input type="hidden" id="menu-edit-id" />
+          <div class="form-row">
+            <label for="menu-name">Name</label>
+            <input
+              type="text"
+              id="menu-name"
+              required
+              placeholder="Item name"
+            />
+          </div>
+          <div class="form-row">
+            <label for="menu-price">Price (₹)</label>
+            <input
+              type="number"
+              id="menu-price"
+              required
+              min="0"
+              step="1"
+              placeholder="0"
+            />
+          </div>
+          <div class="form-row">
+            <label for="menu-image">Image URL</label>
+            <input type="text" id="menu-image" placeholder="https://..." />
+          </div>
+          <div class="form-actions">
+            <button type="submit" id="btn-save-item">Add item</button>
+            <button type="button" id="btn-cancel-edit">Cancel</button>
+          </div>
+        </form>
+        <div id="menu-table-wrap">
+          <table id="menu-table" class="menu-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="menu-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="sales-report">
+        <h2>Monthly sales report</h2>
+        <div class="report-controls">
+          <button type="button" id="btn-prev-month">Previous</button>
+          <span id="report-month-label"></span>
+          <button type="button" id="btn-next-month">Next</button>
+        </div>
+        <div id="report-summary" class="report-summary"></div>
+        <div id="report-orders" class="report-orders"></div>
+      </section>
+    </main>
+
+    <div id="pay-modal" class="modal" aria-hidden="true">
+      <div class="modal-content">
+        <h3>Pay now</h3>
+        <img
+          id="pay-qr"
+          src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PAY_AT_COUNTER"
+          alt="Pay QR code"
+        />
+        <p>Scan to pay at counter</p>
+        <div class="modal-actions">
+          <button type="button" id="btn-confirm-paid">Confirm paid</button>
+          <button type="button" id="btn-close-modal">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/orders.js"></script>
+    <script src="js/menu-crud.js"></script>
+    <script src="js/report.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
